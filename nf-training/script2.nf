@@ -20,6 +20,8 @@ log.info """\
  * given the transcriptome file
  */
 process INDEX {
+    cpus 2
+    
     input:
     path transcriptome
 
@@ -34,4 +36,8 @@ process INDEX {
 
 workflow {
     index_ch = INDEX(params.transcriptome_file)
+    index_ch.view()
 }
+
+// nextflow run script2.nf
+// nextflow run script2.nf -with-docker
