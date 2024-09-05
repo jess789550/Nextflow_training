@@ -29,7 +29,9 @@ All training material was originally written by [Seqera](https://seqera.io) but 
 
 
 ## Notes
+Processes are tasks to be run and channels control the input/output of data.
+
 Run another nextflow pipeline that is in another GitHub repository
-'''
+```
 nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
-'''
+```
