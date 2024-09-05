@@ -74,3 +74,5 @@ workflow {
     quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
     fastqc_ch = FASTQC(read_pairs_ch)
 }
+
+// nextflow run script5.nf -resume
