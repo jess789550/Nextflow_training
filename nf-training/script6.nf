@@ -88,5 +88,8 @@ workflow {
     index_ch = INDEX(params.transcriptome_file)
     quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
     fastqc_ch = FASTQC(read_pairs_ch)
-    MULTIQC(quant_ch.mix(fastqc_ch).collect())
+    //MULTIQC(quant_ch.mix(fastqc_ch).collect()) // combine quant_ch and fastqc_ch then gather as single element
+    MULTIQC(quant_ch.mix(fastqc_ch)) // without collect() MULTIQC is executed 6 times
 }
+
+// nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
