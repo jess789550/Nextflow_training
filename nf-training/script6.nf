@@ -89,7 +89,7 @@ workflow {
     quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
     fastqc_ch = FASTQC(read_pairs_ch)
     //MULTIQC(quant_ch.mix(fastqc_ch).collect()) // combine quant_ch and fastqc_ch then gather as single element
-    MULTIQC(quant_ch.mix(fastqc_ch)) // without collect() MULTIQC is executed 6 times
+    MULTIQC(quant_ch.mix(fastqc_ch)) // without collect() MULTIQC is executed 6 times (2 FASTQ files for gut/lung/liver)
 }
 
 // nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
