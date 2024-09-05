@@ -16,3 +16,10 @@ log.info """\
     .stripIndent()
 
 read_pairs_ch = Channel.fromFilePairs(params.reads)
+read_pairs_ch.view()
+
+Channel
+    .fromFilePairs(params.reads, checkIfExists: true)
+    .set { read_pairs_ch }
+
+// nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
