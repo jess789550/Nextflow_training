@@ -93,3 +93,5 @@ workflow {
 workflow.onComplete {
     log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outdir/multiqc_report.html\n" : "Oops .. something went wrong" )
 }
+
+// nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
