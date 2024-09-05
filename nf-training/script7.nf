@@ -96,3 +96,4 @@ workflow.onComplete {
 }
 
 // nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+// nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq' -with-report -with-trace -with-timeline -with-dag dag.png
