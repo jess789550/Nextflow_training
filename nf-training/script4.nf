@@ -33,6 +33,9 @@ process INDEX {
 }
 
 process QUANTIFICATION {
+    tag "Salmon on $sample_id" // prints out on execution
+    publishDir params.outdir, mode: 'copy' // choose output location
+
     input:
     path salmon_index
     tuple val(sample_id), path(reads)
@@ -54,3 +57,6 @@ workflow {
     index_ch = INDEX(params.transcriptome_file)
     quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
 }
+
+// nextflow run script4.nf -resume
+// nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
