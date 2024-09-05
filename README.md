@@ -26,3 +26,10 @@ All training material was originally written by [Seqera](https://seqera.io) but 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" src="docs/assets/img/cc_by-nc-nd.svg" /></a>
 
 > Copyright 2020-2023, Seqera. All examples and descriptions are licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+
+
+## Notes
+Run another nextflow pipeline that is in another GitHub repository
+'''
+nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
+'''
