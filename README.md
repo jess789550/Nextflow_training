@@ -31,6 +31,14 @@ All training material was originally written by [Seqera](https://seqera.io) but 
 ## Notes
 Processes are tasks to be run and channels control the input/output of data.
 
+Processes have different parts:
+* *Directives* are initial declarations that define optional settings
+* *Input* defines the expected input channel(s)
+* *Output* defines the expected output channel(s)
+* *When* is an optional clause statement to allow conditional processes
+* *Script* is a string statement that defines the command to be executed by the process' task
+
+
 Run another nextflow pipeline that is in another GitHub repository:
 ```
 nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker // -r specific revision
