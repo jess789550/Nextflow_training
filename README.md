@@ -38,6 +38,14 @@ Processes have different parts:
 * *When* is an optional clause statement to allow conditional processes
 * *Script* is a string statement that defines the command to be executed by the process' task
 
+Operators allow you to manipulate channels:
+* Filtering operators
+* Transforming operators
+* Splitting operators
+* Combining operators
+* Forking operators
+* Maths operators
+* Other operators
 
 Run another nextflow pipeline that is in another GitHub repository:
 ```
