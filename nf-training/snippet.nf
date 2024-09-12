@@ -264,32 +264,91 @@
 
 /////////////////////////////////////////////////////////////////
 
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+// reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
-process FOO {
-    publishDir "results/bam", pattern: "*.bam"
-    publishDir "results/bai", pattern: "*.bai"
-    publishDir "results/$sample_id", pattern: "*.{bam, bai}" // store in separate folders by sample id
-    cpus 2
-    memory 1.GB
-    time '1h'
-    disk '10 GB'
-    container 'image/name'
+// process FOO {
+//     publishDir "results/bam", pattern: "*.bam"
+//     publishDir "results/bai", pattern: "*.bai"
+//     publishDir "results/$sample_id", pattern: "*.{bam, bai}" // store in separate folders by sample id
+//     cpus 2
+//     memory 1.GB
+//     time '1h'
+//     disk '10 GB'
+//     container 'image/name'
 
-    input:
-    tuple val(sample_id), path(sample_id_paths)
+//     input:
+//     tuple val(sample_id), path(sample_id_paths)
 
-    output:
-    tuple val(sample_id), path("*.bam")
-    tuple val(sample_id), path("*.bai")
+//     output:
+//     tuple val(sample_id), path("*.bam")
+//     tuple val(sample_id), path("*.bai")
 
-    script:
-    """
-    echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
-    echo your_command_here --sample $sample_id_paths > ${sample_id}.bai
-    """
+//     script:
+//     """
+//     echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
+//     echo your_command_here --sample $sample_id_paths > ${sample_id}.bai
+//     """
+// }
+
+// workflow {
+//     FOO(reads_ch)
+// }
+
+/////////////////////////////////////////////////////////////////
+
+// Channel
+//     .fromPath("data/ggal/*.fq")
+//     .map{file -> [file.name, file]}
+//     .view()
+
+/////////////////////////////////////////////////////////////////
+
+// Channel
+//     .fromPath("data/meta/")
+//     .map{file -> tuple(file.baseName, file)}
+//     .groupTuple()
+//     .view()
+
+/////////////////////////////////////////////////////////////////
+
+// Channel
+//     .fromPath("data/meta/regions.tsv", checkIfExists: true)
+//     // use `sep` option to parse TAB separated files
+//     .splitCsv(sep: '\t', header: false)
+//     .view{row -> "${row[0]}"}
+
+// Channel
+//     .fromPath("data/meta/regions.tsv", checkIfExists: true)
+//     // use `sep` option to parse TAB separated files
+//     .splitCsv(sep: '\t', header: true)
+//     // row is a list object
+//     .view { row -> "${row.patient_id}" }
+
+/////////////////////////////////////////////////////////////////
+
+// list = [10, 20, 30, 40]
+
+// assert list[0] == 11
+
+/////////////////////////////////////////////////////////////////
+
+// foxtype = 'quick'
+// foxcolor = ['b', 'r', 'o', 'w', 'n']
+// println "The $foxtype ${foxcolor.join()} fox"
+
+// x = 'Hello'
+// y = 'World'
+// println "${x} ${y}" // "$x $y" is also acceptable
+
+/////////////////////////////////////////////////////////////////
+
+x = 5
+x = 15
+
+if (x > 10) {
+    println "Hello"
+} else {
+    println "Goodbye"
 }
 
-workflow {
-    FOO(reads_ch)
-}
+println x > 10 ? 'Hello' : 'Goodbye'
