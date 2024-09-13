@@ -47,3 +47,4 @@ workflow {
 // run script
 // nextflow run hello.nf
 // nextflow run hello.nf --greeting 'Bonjour le monde!'
+// nextflow run hello.nf -params-file params.json
