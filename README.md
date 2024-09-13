@@ -66,3 +66,11 @@ Sequera Cloud Platform: https://cloud.seqera.io/user/jess789/launchpad
 * Programmatic integration to meet the needs of an organization.
 * Publishing pipelines to shared workspaces.
 * Management of the infrastructure required to run data analysis at scale.
+
+Cache and resume:
+* Resume workflow
+* View status of previous runs
+```
+nextflow log <run_id> -t template.html > prov.html
+nextflow <file.nf> -resume
+```
