@@ -60,3 +60,9 @@ Configuration priority:
 *  The config file named nextflow.config in the pipeline project directory
 *  The config file $HOME/.nextflow/config
 *  Values defined within the pipeline script itself (e.g., main.nf)
+
+Sequera Cloud Platform: https://cloud.seqera.io/user/jess789/launchpad
+* The launching of pre-configured pipelines with ease.
+* Programmatic integration to meet the needs of an organization.
+* Publishing pipelines to shared workspaces.
+* Management of the infrastructure required to run data analysis at scale.
