@@ -51,3 +51,12 @@ Run another nextflow pipeline that is in another GitHub repository:
 ```
 nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker // -r specific revision
 ```
+
+Configuration priority:
+*  Parameters specified on the command line (--parameter)
+*  Parameters that are provided using the -params-file option
+*  Config file that are provided using the -c option
+*  The config file named nextflow.config in the current directory
+*  The config file named nextflow.config in the pipeline project directory
+*  The config file $HOME/.nextflow/config
+*  Values defined within the pipeline script itself (e.g., main.nf)
