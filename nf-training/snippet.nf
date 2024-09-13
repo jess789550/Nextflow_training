@@ -342,13 +342,23 @@
 
 /////////////////////////////////////////////////////////////////
 
-x = 5
-x = 15
+// x = 5
+// x = 15
 
-if (x > 10) {
-    println "Hello"
-} else {
-    println "Goodbye"
-}
+// if (x > 10) {
+//     println "Hello"
+// } else {
+//     println "Goodbye"
+// }
 
-println x > 10 ? 'Hello' : 'Goodbye'
+// println x > 10 ? 'Hello' : 'Goodbye'
+
+/////////////////////////////////////////////////////////////////
+
+params.foo = 'Hello'
+params.bar = 'world!'
+
+// print both params
+println "$params.foo $params.bar"
+
+// nextflow run snippet.nf --foo "Au revoir"
