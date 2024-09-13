@@ -3,35 +3,39 @@
 params.greeting = 'Hello world!' // default greeting
 greeting_ch = Channel.of(params.greeting)
 
-// split string into chunks of 6 letters
-process SPLITLETTERS {
-    input:
-    val x
-
-    output:
-    path 'chunk_*'
-
-    script:
-    """
-    printf '$x' | split -b 6 - chunk_
-    """
-}
+// // split string into chunks of 6 letters
+// process SPLITLETTERS {
+//     input:
+//     val x
+// 
+//     output:
+//     path 'chunk_*'
+// 
+//     script:
+//     """
+//     printf '$x' | split -b 6 - chunk_
+//     """
+// }
 
 // original: convert string from lowercase to uppercase
 // modified: reverse string
-process CONVERTTOUPPER {
-    input:
-    path y
+// process CONVERTTOUPPER {
+//     input:
+//     path y
+// 
+//     output:
+//     stdout
+// 
+//     script:
+//     """
+//     #cat $y | tr '[a-z]' '[A-Z]' 
+//     rev $y
+//     """
+// }
 
-    output:
-    stdout
-
-    script:
-    """
-    #cat $y | tr '[a-z]' '[A-Z]' 
-    rev $y
-    """
-}
+// import processes from modules.nf
+include { SPLITLETTERS   } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 // run processes 
 workflow {
