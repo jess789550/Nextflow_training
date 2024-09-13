@@ -74,3 +74,22 @@ Cache and resume:
 nextflow log <run_id> -t template.html > prov.html
 nextflow <file.nf> -resume
 ```
+
+Troubleshooting:
+* Can set errorStrategy to "ignore" or "retry"
+* Can set maximum number of retries
+* Can set different actions for different exit codes
+```
+process FOO {
+    cpus 4
+    memory { 2.GB * task.attempt } // increase memory depending on how many times task attempted
+    time { 1.hour * task.attempt } // increase time process can run for depending on how many times task attempted
+    errorStrategy { task.exitStatus == 140 ? 'retry' : 'terminate' } // retry if exit code is 140 otherwise terminate
+    maxRetries 3 
+
+    script:
+    """
+    your_command --cpus $task.cpus --mem $task.memory
+    """
+}
+```
