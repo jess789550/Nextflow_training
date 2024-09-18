@@ -93,3 +93,5 @@ process FOO {
     """
 }
 ```
+
+NextFlow pipelines can be run on the DNAnexus Cloud Platform by converting the script into an app/applet: https://documentation.dnanexus.com/user/running-apps-and-workflows/running-nextflow-pipelines
