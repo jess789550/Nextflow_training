@@ -94,4 +94,10 @@ process FOO {
 }
 ```
 
-NextFlow pipelines can be run on the DNAnexus Cloud Platform by converting the script into an app/applet: https://documentation.dnanexus.com/user/running-apps-and-workflows/running-nextflow-pipelines
+NextFlow pipelines can be run on the DNAnexus Cloud Platform by converting the script into an app/applet: 
+https://documentation.dnanexus.com/user/running-apps-and-workflows/running-nextflow-pipelines
+
+Metadata:
+* Metadata should be explicit - be extremely wary of metadata encoded in filenames
+* Metadata should travel through channels with the data in a tuple element.
+
