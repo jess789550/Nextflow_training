@@ -1,5 +1,9 @@
 process FASTP {
     container 'quay.io/biocontainers/fastp:0.23.2--h79da9fb_0'
+    publishDir = [
+            path: { "results/fastp/json" },
+            saveAs: { filename -> filename.endsWith('.json') ? filename : null },
+        ]
 
     input:
     tuple val(meta), path(reads)
@@ -39,3 +43,13 @@ process FASTP {
         """
     }
 }
+
+// The below give a syntax error :(
+// process {
+//     withName: 'FASTP' {
+//         publishDir = [
+//             path: { "results/fastp/json" },
+//             saveAs: { filename -> filename.endsWith('.json') ? filename : null },
+//         ]
+//     }
+// }
