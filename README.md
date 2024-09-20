@@ -101,3 +101,10 @@ Metadata:
 * Metadata should be explicit - be extremely wary of metadata encoded in filenames
 * Metadata should travel through channels with the data in a tuple element.
 
+./lib:
+Classes defined in lib directory can be used for a variety of purposes. For example, the nf-core/rnaseq workflow uses five custom classes:
+* NfcoreSchema.groovy for parsing the schema.json file and validating the workflow parameters.
+* NfcoreTemplate.groovy for email templating and nf-core utility functions.
+* Utils.groovy for provision of a single checkCondaChannels method.
+* WorkflowMain.groovy for workflow setup and to call the NfcoreTemplate class.
+* WorkflowRnaseq.groovy for the workflow-specific functions.
