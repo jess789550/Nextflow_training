@@ -45,9 +45,15 @@ process convertToUpper {
 
     output:
         path "UPPER-${input_file}"
+    
+    // UPPER-Hello world Adam-output.txt empty
+    // """
+    // cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    // """
 
+    // Remove single quotes to avoid bug - nextflow automatically adds "\" for spaces"
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 
