@@ -108,3 +108,11 @@ Classes defined in lib directory can be used for a variety of purposes. For exam
 * Utils.groovy for provision of a single checkCondaChannels method.
 * WorkflowMain.groovy for workflow setup and to call the NfcoreTemplate class.
 * WorkflowRnaseq.groovy for the workflow-specific functions.
+
+Work directory contains:
+* .command.begin: Metadata related to the beginning of the execution of the process task
+* .command.err: Error messages (stderr) emitted by the process task
+* .command.log: Complete log output emitted by the process task
+* .command.out: Regular output (stdout) by the process task
+* .command.sh: The command that was run by the process task call
+* .exitcode: The exit code resulting from the command
