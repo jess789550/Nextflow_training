@@ -1,101 +1,117 @@
-/*
- * Pipeline parameters
- */
+// /*
+//  * Pipeline parameters // move to nextflow.config
+//  */
 
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/nf-training/hello-nextflow" 
-$projectDir = params.projectDir
+// // Execution environment setup
+// params.projectDir = "/workspace/gitpod/nf-training/hello-nextflow" 
+// $projectDir = params.projectDir
 
-// Primary input
-params.reads_bam = "${projectDir}/data/samplesheet.csv"
+// // Primary input
+// params.reads_bam = "${projectDir}/data/samplesheet.csv"
 
-// Accessory files
-params.genome_reference = "${projectDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${projectDir}/data/intervals.list"
+// // Accessory files
+// params.genome_reference = "${projectDir}/data/ref/ref.fasta"
+// params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+// params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
+// params.calling_intervals = "${projectDir}/data/intervals.list"
 
-// Base name for final output file
-params.cohort_name = "family_trio"
+// // Base name for final output file
+// params.cohort_name = "family_trio"
 
-/*
- * Generate BAM index file
- */
-process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
-
-    input:
-        tuple val(id), path(input_bam)
-
-    output:
-        tuple val(id), path(input_bam), path("${input_bam}.bai")
-
-    """
-    samtools index '$input_bam'
-
-    """
-}
 
 /*
- * Call variants with GATK HaplotypeCaller in GVCF mode
+ * Generate BAM index file // move to ./modules
  */
-process GATK_HAPLOTYPECALLER {
+// process SAMTOOLS_INDEX {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+//     container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
 
-    input:
-        tuple val(id), path(input_bam), path(input_bam_index)
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+//     input:
+//         tuple val(id), path(input_bam)
 
-    output:
-        tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
+//     output:
+//         tuple val(id), path(input_bam), path("${input_bam}.bai")
 
-    """
-    gatk HaplotypeCaller \
-        -R ${ref_fasta} \
-        -I ${input_bam} \
-        -O ${input_bam}.g.vcf \
-        -L ${interval_list} \
-        -ERC GVCF
-    """
-}
+//     """
+//     samtools index '$input_bam'
 
-/*
- * Consolidate GVCFs and apply joint genotyping analysis
- */
-process GATK_JOINTGENOTYPING {
+//     """
+// }
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
 
-    input:
-        path(sample_map)
-        val(cohort_name)
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
 
-    output:
-        path "${cohort_name}.joint.vcf"
-        path "${cohort_name}.joint.vcf.idx"
+// /*
+//  * Call variants with GATK HaplotypeCaller in GVCF mode // move to ./modules
+//  */
+// process GATK_HAPLOTYPECALLER {
 
-    """
-    gatk GenomicsDBImport \
-        --sample-name-map ${sample_map} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
+//     container "docker.io/broadinstitute/gatk:4.5.0.0"
 
-    gatk GenotypeGVCFs \
-        -R ${ref_fasta} \
-        -V gendb://${cohort_name}_gdb \
-        -O ${cohort_name}.joint.vcf \
-        -L ${interval_list}
-    """
-}
+//     input:
+//         tuple val(id), path(input_bam), path(input_bam_index)
+//         path ref_fasta
+//         path ref_index
+//         path ref_dict
+//         path interval_list
+
+//     output:
+//         tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
+
+//     """
+//     gatk HaplotypeCaller \
+//         -R ${ref_fasta} \
+//         -I ${input_bam} \
+//         -O ${input_bam}.g.vcf \
+//         -L ${interval_list} \
+//         -ERC GVCF
+//     """
+// }
+
+
+
+
+// /*
+//  * Consolidate GVCFs and apply joint genotyping analysis // move to ./modules
+//  */
+// process GATK_JOINTGENOTYPING {
+
+//     container "docker.io/broadinstitute/gatk:4.5.0.0"
+
+//     input:
+//         path(sample_map)
+//         val(cohort_name)
+//         path ref_fasta
+//         path ref_index
+//         path ref_dict
+//         path interval_list
+
+//     output:
+//         path "${cohort_name}.joint.vcf"
+//         path "${cohort_name}.joint.vcf.idx"
+
+//     """
+//     gatk GenomicsDBImport \
+//         --sample-name-map ${sample_map} \
+//         --genomicsdb-workspace-path ${cohort_name}_gdb \
+//         -L ${interval_list}
+
+//     gatk GenotypeGVCFs \
+//         -R ${ref_fasta} \
+//         -V gendb://${cohort_name}_gdb \
+//         -O ${cohort_name}.joint.vcf \
+//         -L ${interval_list}
+//     """
+// }
+
+
+
+// Include modules
+include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/local/gatk/haplotypecaller/main.nf'
+include { GATK_JOINTGENOTYPING } from './modules/local/gatk/jointgenotyping/main.nf'
+
+
 
 workflow {
 
@@ -131,3 +147,8 @@ workflow {
         params.calling_intervals
     )
 }
+
+/* 
+* Commands to run 
+*/
+// nextflow run hello-modules.nf
