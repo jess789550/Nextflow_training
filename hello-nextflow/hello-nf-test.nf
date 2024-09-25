@@ -37,3 +37,15 @@ workflow {
         params.calling_intervals
     )
 }
+
+/*
+* Commands to run
+*/
+// nextflow run hello-nf-test.nf
+// nf-test init
+// nf-test generate process modules/local/samtools/index/main.nf
+// nf-test test modules/local/samtools/index/tests/main.nf.test
+// nf-test test modules/local/samtools/index/tests/main.nf.test --update-snapshot
+// nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+// nf-test test modules/local/gatk/jointgenotyping/tests/main.nf.test
+// nf-test generate pipeline hello-nf-test.nf
