@@ -116,3 +116,19 @@ Work directory contains:
 * .command.out: Regular output (stdout) by the process task
 * .command.sh: The command that was run by the process task call
 * .exitcode: The exit code resulting from the command
+
+Testing:
+```
+# initialise nf-test
+nf-test init 
+
+# generate test template
+nf-test generate process modules/.../main.nf
+nf-test generate pipeline main.nf
+
+# move test file
+mkdir -p modules/.../tests
+
+# run tests
+nf-test test modules/.../main.nf.test
+```
