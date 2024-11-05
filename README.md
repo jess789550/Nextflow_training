@@ -117,7 +117,7 @@ Work directory contains:
 * .command.sh: The command that was run by the process task call
 * .exitcode: The exit code resulting from the command
 
-Testing:
+Testing: https://training.nextflow.io/hello_nextflow/08_hello_nf-test/#16-run-the-test-and-examine-the-output
 ```
 # initialise nf-test
 nf-test init 
